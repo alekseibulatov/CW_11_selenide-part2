@@ -97,7 +97,6 @@ public class Snippets {
         // old html actions don't work with many modern frameworks
         $("").selectOption("dropdown_option");
         $("").selectRadio("ratio_options");
-
     }
 
     void assertions_examples() {
@@ -110,7 +109,38 @@ public class Snippets {
 
         //longer timeouts
         $("").shouldBe(appear, Duration.ofSeconds(30));
-
-
     }
+
+    void conditions_examples() {
+        $("").shouldBe(visible);
+        $("").shouldBe(hidden);
+
+        $("").shouldHave(text("abc"));
+        $("").shouldHave(exactText("abc"));
+        $("").shouldHave(textCaseSensitive("abc"));
+        $("").shouldHave(exactTextCaseSensitive("abc"));
+        $("").should(matchText("[0-9abc$"));
+
+        $("").shouldHave(cssClass(".red"));
+        $("").shouldHave(cssValue("front-size", "12"));
+
+        $("").shouldHave(value("25"));
+        $("").shouldHave(exactValue("25"));
+        $("").shouldBe(empty);
+
+        $("").shouldHave(attribute("disabled"));
+        $("").shouldHave(attribute("name", "example"));
+        $("").shouldHave(attributeMatching("name", "[0-9]abc$"));
+
+        $("").shouldBe(checked);
+
+        // Warning! Only checks if it is in DOM, not if it is visible! You don't need it in most tests!
+        $("").should(exist);
+
+        // Warning! Checks only the "disabled" attribute! Will not work with many modern frameworks
+        $("").shouldBe(disabled);
+        $("").shouldBe(enabled);
+    }
+
+
 }
