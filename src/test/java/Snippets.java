@@ -1,6 +1,9 @@
 import com.codeborne.selenide.*;
 import org.openqa.selenium.*;
 
+import java.time.Duration;
+
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -94,6 +97,20 @@ public class Snippets {
         // old html actions don't work with many modern frameworks
         $("").selectOption("dropdown_option");
         $("").selectRadio("ratio_options");
+
+    }
+
+    void assertions_examples() {
+        $("").shouldBe(visible);
+        $("").shouldNotBe(visible);
+        $("").shouldHave(text("abc"));
+        $("").shouldNotHave(text("abc"));
+        $("").should(appear);
+        $("").shouldNot(appear);
+
+        //longer timeouts
+        $("").shouldBe(appear, Duration.ofSeconds(30));
+
 
     }
 }
