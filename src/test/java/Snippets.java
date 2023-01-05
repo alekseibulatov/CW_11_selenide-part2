@@ -1,6 +1,8 @@
 import com.codeborne.selenide.*;
 import org.openqa.selenium.*;
 
+import java.io.*;
+import java.io.FileNotFoundException;
 import java.time.Duration;
 
 import static com.codeborne.selenide.CollectionCondition.*;
@@ -179,5 +181,15 @@ public class Snippets {
         $$("").shouldHave(sizeLessThanOrEqual(2));
     }
 
+    void file_operation_examples() throws FileNotFoundException {
+        File file1 = $("a.fileLink").download(); // only for <a href=".."> links
+        File file2 = $("div").download(DownloadOptions.using(FileDownloadMode.FOLDER)); // more common options, but may have problems with Grid/Selenoid
+
+        File file = new File("src/test/resources/readme.txt");
+        $("#file-upload").uploadFile(file);
+        $("#file-upload").uploadFromClasspath("readme.txt");
+        // don't forget to submit!
+        $("uploadButton").click();
+    }
 
 }
