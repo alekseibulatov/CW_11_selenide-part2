@@ -3,7 +3,9 @@ import org.openqa.selenium.*;
 
 import java.time.Duration;
 
+import static com.codeborne.selenide.CollectionCondition.*;
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -140,6 +142,41 @@ public class Snippets {
         // Warning! Checks only the "disabled" attribute! Will not work with many modern frameworks
         $("").shouldBe(disabled);
         $("").shouldBe(enabled);
+    }
+
+    void collections_examples() {
+        $$("div"); // does nothing!
+
+        $$x("//div"); // by XPath
+
+        // selections
+        $$("div").filterBy(text("123")).shouldHave(size(1));
+        $$("div").excludeWith(text("123")).shouldHave(size(1));
+
+        $$("div").first().click();
+        elements("div").first().click();
+        // $("div").click();
+        $$("div").last().click();
+        $$("div").get(1).click(); // the second! (start with 0)
+        $("div", 1).click(); // same as previous
+        $$("div").findBy(text("123")).click(); //  finds first
+
+        // assertions
+        $$("").shouldHave(size(0));
+        $$("").shouldBe(CollectionCondition.empty); // the same
+
+        $$("").shouldHave(texts("Alfa", "Beta", "Gamma"));
+        $$("").shouldHave(exactTexts("Alfa", "Beta", "Gamma"));
+
+        $$("").shouldHave(textsInAnyOrder("Beta", "Gamma", "Alfa"));
+        $$("").shouldHave(exactTextsCaseSensitiveInAnyOrder("Beta", "Gamma", "Alfa"));
+
+        $$("").shouldHave(itemWithText("Gamma")); // only one text
+
+        $$("").shouldHave(sizeGreaterThan(0));
+        $$("").shouldHave(sizeGreaterThanOrEqual(1));
+        $$("").shouldHave(sizeLessThan(3));
+        $$("").shouldHave(sizeLessThanOrEqual(2));
     }
 
 
