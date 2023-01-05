@@ -1,9 +1,7 @@
-import com.codeborne.selenide.AuthenticationType;
-import com.codeborne.selenide.BasicAuthCredentials;
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.WebDriverRunner;
-import org.openqa.selenium.Cookie;
+import com.codeborne.selenide.*;
+import org.openqa.selenium.*;
 
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 
 
@@ -34,5 +32,40 @@ public class Snippets {
 
         var cookie = new Cookie("foo", "bar");
         WebDriverRunner.getWebDriver().manage().addCookie(cookie);
+    }
+
+    void selectors_examples() {
+        $("div").click();
+        element("div").click();
+
+        $("div", 2).click(); // the third div
+
+        $x("//h1/div").click();
+        $(byXpath("//h1/div")).click();
+
+        $(byText("full text")).click();
+        $(withText("ull tex")).click();
+
+        $(byTagAndText("div", "full text"));
+        $(withTagAndText("div", "ull tex"));
+
+        $("").parent();
+        $("").sibling(1);
+        $("").preceding(1);
+        $("").closest("div");
+        $("").ancestor("div"); // the same as closest
+        $("div:last-child");
+
+        $("div").$("h1").find(byText("abc")).click();
+        $(byAttribute("abc", "x")).click();
+        $("[abc=x]").click();
+
+        $(byId("mytext")).click();
+        $("#mytext").click();
+
+        $(byClassName("red")).click();
+        $(".red").click();
+
+
     }
 }
