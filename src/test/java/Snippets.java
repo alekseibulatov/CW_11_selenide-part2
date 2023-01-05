@@ -65,7 +65,35 @@ public class Snippets {
 
         $(byClassName("red")).click();
         $(".red").click();
+    }
 
+    void actions_examples() {
+        $("").click();
+        $("").doubleClick();
+        $("").contextClick();
+
+        $("").hover();
+
+        $("").setValue("text");
+        $("").append("text");
+        $("").clear();
+        $("").setValue(""); // clear
+
+        $("div").sendKeys("c"); // hotkey c on element
+        actions().sendKeys("c").perform(); //hotkey c on whole application
+        actions().sendKeys(Keys.chord(Keys.CONTROL, "f")).perform();
+        $("html").sendKeys(Keys.chord(Keys.CONTROL, "f"));
+
+        $("").pressEnter();
+        $("").pressEscape();
+        $("").pressTab();
+
+        // complex actions with keybord and mouse, example
+        actions().moveToElement($("div")).clickAndHold().moveByOffset(300, 200).release().perform();
+
+        // old html actions don't work with many modern frameworks
+        $("").selectOption("dropdown_option");
+        $("").selectRadio("ratio_options");
 
     }
 }
